@@ -20,7 +20,7 @@
   var pluginName = 'jqSignature',
       defaults = {
         lineColor: "#222222",
-        lineWidth: 2,
+        lineWidth: 1,
         width: 300,
         height: 100
       },
@@ -48,6 +48,7 @@
   }
 
   Signature.prototype = {
+    // Initialize the signature canvas
     init: function() {
       var that = this;
       // Set up the canvas
@@ -64,17 +65,14 @@
         cursor: 'crosshair'
       });
       this.canvas = this.$canvas[0];
-      this.ctx = this.canvas.getContext("2d");
-      this.ctx.strokeStyle = this.settings.lineColor;
-      this.ctx.lineWidth = this.settings.lineWidth;
+      this._resetCanvas();
       // Set up mouse events
       this.$canvas.on('mousedown touchstart', $.proxy(function(e) {
-        // console.log(e.originalEvent.constructor);
         this.drawing = true;
-        this.lastPos = this.currentPos = this._getCursorPosition(e);
+        this.lastPos = this.currentPos = this._getPosition(e);
       }, this));
       this.$canvas.on('mousemove touchmove', $.proxy(function(e) {
-        this.currentPos = this._getCursorPosition(e);
+        this.currentPos = this._getPosition(e);
       }, this));
       this.$canvas.on('mouseup touchend', $.proxy(function(e) {
         this.drawing = false;
@@ -91,13 +89,17 @@
         that._renderCanvas();
       })();
     },
+    // Clear the canvas
     clearCanvas: function() {
       this.canvas.width = this.canvas.width;
+      this._resetCanvas();
     },
+    // Get the content of the canvas as a base64 data URL
     getDataURL: function() {
-      return canvas.toDataURL();
+      return this.canvas.toDataURL();
     },
-    _getCursorPosition: function(event) {
+    // Get the position of the mouse/touch
+    _getPosition: function(event) {
       var xPos, yPos, rect;
       rect = this.canvas.getBoundingClientRect();
       event = event.originalEvent;
@@ -114,6 +116,7 @@
         y: yPos
       };
     },
+    // Render the signature to the canvas
     _renderCanvas: function() {
       if (this.drawing) {
         this.ctx.moveTo(this.lastPos.x, this.lastPos.y);
@@ -121,6 +124,11 @@
         this.ctx.stroke();
         this.lastPos = this.currentPos;
       }
+    },
+    _resetCanvas: function() {
+      this.ctx = this.canvas.getContext("2d");
+      this.ctx.strokeStyle = this.settings.lineColor;
+      this.ctx.lineWidth = this.settings.lineWidth;
     }
   };
 
