@@ -1,7 +1,7 @@
 {
   "name": "jq-signature",
   "version": "1.0.0",
-  "description": "Create a digital signature field and save it as an image.",
+  "description": "jQuery plugin for creating touch-friendly signature fields using the HTML5 canvas",
   "main": "jq-signature.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -33,5 +33,5 @@
   "bugs": {
     "url": "https://github.com/bencentra/jq-signature/issues"
   },
-  "homepage": "https://github.com/bencentra/jq-signature"
+  "homepage": "https://bencentra.github.io/jq-signature"
 }
