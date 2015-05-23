@@ -24,7 +24,7 @@
         width: 300,
         height: 100
       },
-      canvas = '<canvas></canvas>';
+      canvasFixture = '<canvas></canvas>';
 
   function Signature(element, options) {
     // DOM elements/objects
@@ -50,9 +50,8 @@
   Signature.prototype = {
     // Initialize the signature canvas
     init: function() {
-      var that = this;
       // Set up the canvas
-      this.$canvas = $(canvas).appendTo(this.$element);
+      this.$canvas = $(canvasFixture).appendTo(this.$element);
       this.$canvas.attr({
         width: this.settings.width,
         height: this.settings.height
@@ -84,6 +83,7 @@
         }
       }, this));
       // Start drawing
+      var that = this;
       (function drawLoop() {
         window.requestAnimFrame(drawLoop);
         that._renderCanvas();
@@ -103,10 +103,12 @@
       var xPos, yPos, rect;
       rect = this.canvas.getBoundingClientRect();
       event = event.originalEvent;
+      // Touch event
       if (event.constructor === TouchEvent) {
         xPos = event.touches[0].clientX - rect.left,
         yPos = event.touches[0].clientY - rect.top
       }
+      // Mouse event
       else {
         xPos = event.clientX - rect.left,
         yPos = event.clientY - rect.top 
@@ -125,6 +127,7 @@
         this.lastPos = this.currentPos;
       }
     },
+    // Reset the canvas context
     _resetCanvas: function() {
       this.ctx = this.canvas.getContext("2d");
       this.ctx.strokeStyle = this.settings.lineColor;
