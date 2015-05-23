@@ -4,10 +4,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Signature Plugin</title>
 	<!-- Styles -->
-	<link rel="stylesheet" href="bootstrap.css">
+	<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
 	<style>
+		* {
+			font-size: 16px;
+			font-family: Arial;
+		}
 		.center {
 			text-align: center;
+		}
+		td {
+			padding-top: 8px !important;
+			padding-bottom: 8px !important;
+		}
+		li {
+			margin: 8px 0;
 		}
 	</style>
 </head>
@@ -45,15 +56,17 @@
 		<div class="col-xs-12">
 			<h3>Options</h3>
 			<p>Configuration options can be set with the options parameter or through data-attributes.</p>
-			<table class="table">
+			<table class="table table-striped">
 				<thead>
 					<tr><td>Option</td><td>Description</td><td>Data Attribute</td><td>Options Example</td></tr>
 				</thead>
 				<tbody>
 					<tr><td><strong>Width</strong></td><td>The width of the signature canvas (in pixels). <em>Default: 300</em></td><td><code>data-width="600"</td><td><code>$().jqSignature({width: 600});</code></td></tr>
 					<tr><td><strong>Height</strong></td><td>The height of the signature canvas (in pixels). <em>Default: 100</em></td><td><code>data-height="200"</td><td><code>$().jqSignature({height: 200});</code></td></tr>
+					<tr><td><strong>Border</strong></td><td>The CSS for the border of the canvas. <em>Default: '1px solid #AAAAAA'</em></td><td><code>data-border="1px solid red"</td><td><code>$().jqSignature({border: '1px solid red'});</code></td></tr>
 					<tr><td><strong>Line Color</strong></td><td>The color of the signature (as hex). <em>Default: '#222222'</em></td><td><code>data-line-color="#ABCDEF"</td><td><code>$().jqSignature({lineColor: '#ABCDEF'});</code></td></tr>
 					<tr><td><strong>Line Width</strong></td><td>The width of the signature line (in pixels). <em>Default: 1</em></td><td><code>data-line-width="2"</td><td><code>$().jqSignature({lineWidth: 2});</code></td></tr>
+					<tr><td><strong>Auto Fit</strong></td><td>Make the canvas fill the width of its parent element. <em>Default: false</em></td><td><code>data-auto-fit="true"</td><td><code>$().jqSignature({autoFit: true});</code></td></tr>
 				</tbody>
 			</table>
 		</div>
@@ -73,7 +86,7 @@
 		<div class="col-xs-12">
 			<h3>Complete Example</h3>
 			<p>Sign Below:</p>
-			<div class="js-signature" data-width="600" data-height="200" data-line-color="#bc0000"></div>
+			<div class="js-signature" data-width="600" data-height="200" data-border="1px dotted black" data-line-color="#bc0000" data-auto-fit="true"></div>
 			<p><button class="btn btn-default" onclick="clearCanvas();">Clear Canvas</button>&nbsp;<button class="btn btn-default" onclick="saveSignature();">Save Signature</button></p>
 			<div id="signature">
 				<p><em>Your signature will appear here when you click "Save Signature"</em></p>
@@ -106,7 +119,7 @@
 	<br><br>
 </div>
 <!-- Scripts -->
-<script src="jquery-2.1.4.js"></script>
+<script src="vendor/jquery/dist/jquery.min.js"></script>
 <script src="jq-signature.js"></script>
 <script>
 	$(document).on('ready', function() {

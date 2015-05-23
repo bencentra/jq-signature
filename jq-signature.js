@@ -19,10 +19,12 @@
 
   var pluginName = 'jqSignature',
       defaults = {
-        lineColor: "#222222",
+        lineColor: '#222222',
         lineWidth: 1,
+        border: '1px dashed #AAAAAA',
         width: 300,
-        height: 100
+        height: 100,
+        autoFit: false
       },
       canvasFixture = '<canvas></canvas>';
 
@@ -58,11 +60,22 @@
       });
       this.$canvas.css({
         boxSizing: 'border-box',
-        width: this.settings.width,
-        height: this.settings.height,
-        border: '1px solid gray',
+        width: this.settings.width + 'px',
+        height: this.settings.height + 'px',
+        border: this.settings.border,
         cursor: 'crosshair'
       });
+      // Fit canvas to width of parent
+      if (this.settings.autoFit === true) {
+        this._resizeCanvas();
+        // TO-DO - allow for dynamic canvas resizing 
+        // (need to save canvas state before changing width to avoid getting cleared)
+        // var timeout = false;
+        // $(window).on('resize', $.proxy(function(e) {
+        //   clearTimeout(timeout);
+        //   timeout = setTimeout($.proxy(this._resizeCanvas, this), 250);
+        // }, this));
+      }
       this.canvas = this.$canvas[0];
       this._resetCanvas();
       // Set up mouse events
@@ -105,13 +118,13 @@
       event = event.originalEvent;
       // Touch event
       if (event.constructor === TouchEvent) {
-        xPos = event.touches[0].clientX - rect.left,
-        yPos = event.touches[0].clientY - rect.top
+        xPos = event.touches[0].clientX - rect.left;
+        yPos = event.touches[0].clientY - rect.top;
       }
       // Mouse event
       else {
-        xPos = event.clientX - rect.left,
-        yPos = event.clientY - rect.top 
+        xPos = event.clientX - rect.left;
+        yPos = event.clientY - rect.top;
       }
       return {
         x: xPos,
@@ -132,6 +145,12 @@
       this.ctx = this.canvas.getContext("2d");
       this.ctx.strokeStyle = this.settings.lineColor;
       this.ctx.lineWidth = this.settings.lineWidth;
+    },
+    // Resize the canvas element
+    _resizeCanvas: function() {
+      var width = this.$element.outerWidth();
+      this.$canvas.attr('width', width);
+      this.$canvas.css('width', width + 'px');
     }
   };
 
