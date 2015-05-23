@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Signature Plugin</title>
+	<!-- Styles -->
+	<style>
+		html, body {
+			margin: 0;
+			padding: 0;
+		}
+		.container {
+			max-width: 1280px;
+			margin: auto;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<!-- Body Content -->
+<div class="container">
+	<h1>jQuery Signature</h1>
+	<p>Create a new signature field with <code>$('.js-signature').jqSignature();</code></p>
+	<div class="js-signature"></div>
+</div>
+<!-- Scripts -->
+<script src="jquery-2.1.4.js"></script>
+<script src="jq-signature.js"></script>
+<script>
+	$(document).on('ready', function() {
+		$('.js-signature').jqSignature({
+			width: 600,
+			height: 200,
+			lineColor: '#bc0000',
+			lineWidth: 1
+		});
+	});
+</script>
+</body>
+</html>

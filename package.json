@@ -1,0 +1,11 @@
+{
+  "name": "jq-signature",
+  "version": "1.0.0",
+  "description": "Create a digital signature field and save it as an image.",
+  "main": "jq-signature.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ben Centra <blcentra@gmail.com> (http://bencentra.com)",
+  "license": "MIT"
+}
