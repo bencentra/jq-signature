@@ -4,7 +4,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Signature Plugin</title>
 	<!-- Styles -->
+	<link rel="stylesheet" href="bootstrap.css">
 	<style>
+		* {
+
+		}
 		.container {
 			max-width: 960px;
 			margin: auto;
@@ -17,60 +21,94 @@
 <body>
 <!-- Body Content -->
 <div class="container">
-	<div class="center">
-		<h1>jQuery Signature</h1>
-		<h3>A jQuery plugin for creating touch-friendly signature fields using the HTML5 canvas.</h3>
+
+	<div class="row center">
+		<div class="col-xs-12">
+			<h1>jQuery Signature</h1>
+			<h4>A jQuery plugin for creating touch-friendly signature fields using the HTML5 canvas.</h4>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>Basic Example</h3>
+			<p>Sign Below:</p>
+			<div class="js-signature"></div>
+		</div>
 	</div>
 
-	<h2>Basic Example</h2>
-	<p>Sign Below:</p>
-	<div class="js-signature"></div>
 
-	<h2>Usage</h2>
-	<p>First, create a placeholder &lt;div&gt; for the signature canvas:</p>
-	<p><code>&lt;div class='js-signature'&gt;&lt;/div&gt;</code></p>
-	<p>Next, initialize the plugin in JavaScript:</p>
-	<p><code>$('.js-dropdown').jqSignature();</code></p>
+	<div class="row">
+		<div class="col-xs-12">
+		<h3>Usage</h3>
+			<p>First, create a placeholder &lt;div&gt; for the signature canvas:</p>
+			<p><code>&lt;div class='js-signature'&gt;&lt;/div&gt;</code></p>
+			<p>Next, initialize the plugin in JavaScript:</p>
+			<p><code>$('.js-dropdown').jqSignature();</code></p>
+		</div>
+	</div>
 
-	<h2>Options</h2>
-	<p>Configuration options can be set with the options parameter or through data-attributes.</p>
-	<table>
-		<thead>
-			<tr><td>Option</td><td>Description</td><td>Data Attribute</td><td>Options Example</td></tr>
-		</thead>
-		<tbody>
-			<tr><td><strong>Width</strong></td><td>The width of the signature canvas (in pixels). <em>Default: 300</em></td><td><code>data-width="600"</td><td><code>$().jqSignature({width: 600});</code></td></tr>
-			<tr><td><strong>Height</strong></td><td>The height of the signature canvas (in pixels). <em>Default: 100</em></td><td><code>data-height="200"</td><td><code>$().jqSignature({height: 200});</code></td></tr>
-			<tr><td><strong>Line Color</strong></td><td>The color of the signature (as hex). <em>Default: '#222222'</em></td><td><code>data-line-color="#ABCDEF"</td><td><code>$().jqSignature({lineColor: '#ABCDEF'});</code></td></tr>
-			<tr><td><strong>Line Width</strong></td><td>The width of the signature line (in pixels). <em>Default: 1</em></td><td><code>data-line-width="2"</td><td><code>$().jqSignature({lineWidth: 2});</code></td></tr>
-		</tbody>
-	</table>
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>Options</h3>
+			<p>Configuration options can be set with the options parameter or through data-attributes.</p>
+			<table class="table">
+				<thead>
+					<tr><td>Option</td><td>Description</td><td>Data Attribute</td><td>Options Example</td></tr>
+				</thead>
+				<tbody>
+					<tr><td><strong>Width</strong></td><td>The width of the signature canvas (in pixels). <em>Default: 300</em></td><td><code>data-width="600"</td><td><code>$().jqSignature({width: 600});</code></td></tr>
+					<tr><td><strong>Height</strong></td><td>The height of the signature canvas (in pixels). <em>Default: 100</em></td><td><code>data-height="200"</td><td><code>$().jqSignature({height: 200});</code></td></tr>
+					<tr><td><strong>Line Color</strong></td><td>The color of the signature (as hex). <em>Default: '#222222'</em></td><td><code>data-line-color="#ABCDEF"</td><td><code>$().jqSignature({lineColor: '#ABCDEF'});</code></td></tr>
+					<tr><td><strong>Line Width</strong></td><td>The width of the signature line (in pixels). <em>Default: 1</em></td><td><code>data-line-width="2"</td><td><code>$().jqSignature({lineWidth: 2});</code></td></tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-	<h2>Methods</h2>
-	<ul>
-		<li><code>$().jqSignature('clearCanvas');</code> - Clears the signature canvas.</li>
-		<li><code>$().jqSignature('getDataURL');</code> - Get the contents of the signature canvas as a base64 data URL.</li>
-	</ul>
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>Methods</h3>
+			<ul>
+				<li><code>$().jqSignature('clearCanvas');</code> - Clears the signature canvas.</li>
+				<li><code>$().jqSignature('getDataURL');</code> - Get the contents of the signature canvas as a base64 data URL.</li>
+			</ul>
+		</div>
+	</div>
 
-	<h2>Complete Example</h2>
-	<p>Sign Below:</p>
-	<div class="js-signature" data-width="600" data-height="200" data-line-color="#bc0000"></div>
-	<p><button onclick="clearCanvas();">Clear Canvas</button>&nbsp;<button onclick="saveSignature();">Save Signature</button></p>
-	<div id="signature"></div>
-	<script>
-		function clearCanvas() {
-			$('#signature').empty();
-			$('.js-signature').eq(1).jqSignature('clearCanvas');
-		}
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>Complete Example</h3>
+			<p>Sign Below:</p>
+			<div class="js-signature" data-width="600" data-height="200" data-line-color="#bc0000"></div>
+			<p><button class="btn btn-default" onclick="clearCanvas();">Clear Canvas</button>&nbsp;<button class="btn btn-default" onclick="saveSignature();">Save Signature</button></p>
+			<div id="signature">
+				<p><em>Your signature will appear here when you click "Save Signature"</em></p>
+			</div>
+			<script>
+				function clearCanvas() {
+					$('#signature').html('<p><em>Your signature will appear here when you click "Save Signature"</em></p>');
+					$('.js-signature').eq(1).jqSignature('clearCanvas');
+				}
 
-		function saveSignature() {
-			$('#signature').empty();
-			var dataUrl = $('.js-signature').eq(1).jqSignature('getDataURL');
-			var img = $('<img>').attr('src', dataUrl);
-			$('#signature').append($('<p>').text("Here's your signature"));
-			$('#signature').append(img);
-		}
-	</script>
+				function saveSignature() {
+					$('#signature').empty();
+					var dataUrl = $('.js-signature').eq(1).jqSignature('getDataURL');
+					var img = $('<img>').attr('src', dataUrl);
+					$('#signature').append($('<p>').text("Here's your signature:"));
+					$('#signature').append(img);
+				}
+			</script>
+		</div>
+	</div>
+
+	<br><hr><br>
+
+	<div class="row center">
+		<div class="col-xs-12">
+			<p><a href="#">View on GitHub</a></p>
+		</div>
+	</div>
 
 	<br><br>
 </div>
