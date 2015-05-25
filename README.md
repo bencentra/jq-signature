@@ -1,6 +1,12 @@
 # jQuery Signature
 
-jQuery plugin for creating touch-friendly signature fields using the HTML5 canvas. Check out [the demo][demo]!
+jQuery plugin for creating touch-friendly signature fields using the HTML5 canvas. 
+
+Check out [the demo][demo]!
+
+## Installation
+
+TO-DO
 
 ## Usage
 

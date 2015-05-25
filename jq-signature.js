@@ -22,6 +22,7 @@
         lineColor: '#222222',
         lineWidth: 1,
         border: '1px dashed #AAAAAA',
+        background: '#FFFFFF',
         width: 300,
         height: 100,
         autoFit: false
@@ -63,6 +64,7 @@
         width: this.settings.width + 'px',
         height: this.settings.height + 'px',
         border: this.settings.border,
+        background: this.settings.background,
         cursor: 'crosshair'
       });
       // Fit canvas to width of parent
@@ -88,6 +90,9 @@
       }, this));
       this.$canvas.on('mouseup touchend', $.proxy(function(e) {
         this.drawing = false;
+        // Trigger a change event
+        var changedEvent = $.Event('jq.signature.changed');
+        this.$element.trigger(changedEvent);
       }, this));
       // Prevent document scrolling when touching canvas
       $(document).on('touchstart touchmove touchend', $.proxy(function(e) {
@@ -117,7 +122,7 @@
       rect = this.canvas.getBoundingClientRect();
       event = event.originalEvent;
       // Touch event
-      if (event.constructor === TouchEvent) {
+      if (event.type.indexOf('touch') !== -1) { // event.constructor === TouchEvent
         xPos = event.touches[0].clientX - rect.left;
         yPos = event.touches[0].clientY - rect.top;
       }

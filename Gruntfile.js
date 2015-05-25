@@ -15,7 +15,7 @@ module.exports = function(grunt) {
       },
       min: {
         files: {
-            'js-signature.min.js': ['jq-signature.js']
+            'jq-signature.min.js': ['jq-signature.js']
         }
       }
     },
