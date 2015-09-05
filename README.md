@@ -6,7 +6,9 @@ Check out [the demo][demo]!
 
 ## Usage
 
-Include `jq-signature.js` (development) or `jq-signature.min.js` (production) on your webpage. You can also install it via Bower: `bower install jq-signature`.
+Include `jq-signature.js` (development) or `jq-signature.min.js` (production) on your webpage. 
+
+You can also install it via Bower: `bower install jq-signature`.
 
 For complete usage instructions, check out the [demo page][demo].
 
