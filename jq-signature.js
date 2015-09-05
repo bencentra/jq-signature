@@ -109,7 +109,7 @@
     },
     // Clear the canvas
     clearCanvas: function() {
-      this.canvas.width = this.canvas.width;
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this._resetCanvas();
     },
     // Get the content of the canvas as a base64 data URL
@@ -139,6 +139,7 @@
     // Render the signature to the canvas
     _renderCanvas: function() {
       if (this.drawing) {
+        this.ctx.beginPath();
         this.ctx.moveTo(this.lastPos.x, this.lastPos.y);
         this.ctx.lineTo(this.currentPos.x, this.currentPos.y);
         this.ctx.stroke();

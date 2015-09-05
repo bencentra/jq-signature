@@ -1,6 +1,6 @@
 {
   "name": "jq-signature",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "jQuery plugin for creating touch-friendly signature fields using the HTML5 canvas",
   "main": "jq-signature.js",
   "scripts": {
