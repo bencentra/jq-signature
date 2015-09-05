@@ -1,7 +1,7 @@
 {
   "name": "jq-signature",
   "main": "jq-signature.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/bencentra/jq-signature",
   "authors": [
     "Ben Centra <blcentra@gmail.com>"

@@ -47,14 +47,23 @@
 	<div class="row">
 		<div class="col-xs-12">
 		<h3>Installation</h3>
-			<p>Download the file and include it in your HTML page. Bower package coming eventually!</p>
+			<p>Download the file and include it in your HTML page:</p>
 			<ul>
 				<li>Development, uncompressed: <a href="https://raw.githubusercontent.com/bencentra/jq-signature/master/jq-signature.js">jq-signature.js</a></li>
 				<li>Production, compressed: <a href="https://raw.githubusercontent.com/bencentra/jq-signature/master/jq-signature.min.js">jq-signature.min.js</a></li>
 			</ul>
+			<p>You can also install it via Bower:</p>
+			<p><code>bower install jq-signature</code></p>
 		</div>
 	</div>
 
+	<div class="row">
+		<div class="col-xs-12">
+		<h3>Browser Compatibility</h3>
+			<p>Tested and functioning in Chrome, Firefox, Safari 8, IE11, and Edge.</p>
+			<p>Developed using jQuery 2.1.4.</p>
+		</div>
+	</div>
 
 	<div class="row">
 		<div class="col-xs-12">
@@ -113,7 +122,7 @@
 
 	<div class="row center">
 		<div class="col-xs-12">
-			<p><a href="#">View on GitHub</a></p>
+			<p><a href="https://github.com/bencentra/jq-signature">View on GitHub</a></p>
 		</div>
 	</div>
 
@@ -121,7 +130,7 @@
 </div>
 <!-- Scripts -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="jq-signature.js"></script>
+<script src="jq-signature.min.js"></script>
 <script>
 	$(document).on('ready', function() {
 		if ($('.js-signature').length) {
