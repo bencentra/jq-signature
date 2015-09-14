@@ -1,5 +1,7 @@
 # jQuery Signature
 
+[![Bower version](https://badge.fury.io/bo/jq-signature.svg)](http://badge.fury.io/bo/jq-signature)
+
 jQuery plugin for creating touch-friendly signature fields using the HTML5 canvas. 
 
 Check out [the demo][demo]!
