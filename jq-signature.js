@@ -1,6 +1,5 @@
 (function(window, document, $) {
 	'use strict';
-
   // Get a regular interval for drawing to the screen
   window.requestAnimFrame = (function (callback) {
     return window.requestAnimationFrame || 
@@ -17,7 +16,7 @@
   * Plugin Constructor
   */
 
-  var pluginName = 'jqSignature',
+    var pluginName = 'jqSignature',
       defaults = {
         lineColor: '#222222',
         lineWidth: 1,
@@ -29,7 +28,7 @@
       },
       canvasFixture = '<canvas></canvas>';
 
-  function Signature(element, options) {
+  function Signature(element, options) {    
     // DOM elements/objects
     this.element = element;
     this.$element = $(this.element);
@@ -67,6 +66,8 @@
         background: this.settings.background,
         cursor: 'crosshair'
       });
+
+      this.$canvas.attr('id', 'TheCanvas');
       // Fit canvas to width of parent
       if (this.settings.autoFit === true) {
         this._resizeCanvas();
@@ -80,26 +81,47 @@
       }
       this.canvas = this.$canvas[0];
       this._resetCanvas();
-      // Set up mouse events
-      this.$canvas.on('mousedown touchstart', $.proxy(function(e) {
-        this.drawing = true;
-        this.lastPos = this.currentPos = this._getPosition(e);
-      }, this));
-      this.$canvas.on('mousemove touchmove', $.proxy(function(e) {
-        this.currentPos = this._getPosition(e);
-      }, this));
-      this.$canvas.on('mouseup touchend', $.proxy(function(e) {
-        this.drawing = false;
-        // Trigger a change event
-        var changedEvent = $.Event('jq.signature.changed');
-        this.$element.trigger(changedEvent);
-      }, this));
-      // Prevent document scrolling when touching canvas
-      $(document).on('touchstart touchmove touchend', $.proxy(function(e) {
-        if (e.target === this.canvas) {
-          e.preventDefault();
-        }
-      }, this));
+        // Set up mouse events
+
+        // IE fix
+      if (window.PointerEvent) {
+          var c = document.getElementById('TheCanvas');
+          c.addEventListener("MSPointerUp", $.proxy(function (e) {
+                  this.drawing = false;
+                  // Trigger a change event
+                  var changedEvent = $.Event('jq.signature.changed');
+                  this.$element.trigger(changedEvent);
+              }, this), false);
+          c.addEventListener("MSPointerMove", $.proxy(function (e) {
+              this.currentPos = this._getPosition(e);
+          }, this), false);
+          c.addEventListener("MSPointerDown", $.proxy(function (e) {
+                  this.drawing = true;
+                  this.lastPos = this.currentPos = this._getPosition(e);
+              }, this), false);
+      }
+      else {
+          this.$canvas.on('mousedown touchstart', $.proxy(function (e) {
+              this.drawing = true;
+              this.lastPos = this.currentPos = this._getPosition(e);
+          }, this));
+          this.$canvas.on('mousemove touchmove', $.proxy(function (e) {
+              this.currentPos = this._getPosition(e);
+          }, this));
+          this.$canvas.on('mouseup touchend', $.proxy(function (e) {
+              this.drawing = false;
+              // Trigger a change event
+              var changedEvent = $.Event('jq.signature.changed');
+              this.$element.trigger(changedEvent);
+          }, this));
+          // Prevent document scrolling when touching canvas
+          $(document).on('touchstart touchmove touchend', $.proxy(function (e) {
+              if (e.target === this.canvas) {
+                  e.preventDefault();
+              }
+          }, this));
+      }
+
       // Start drawing
       var that = this;
       (function drawLoop() {
@@ -117,12 +139,14 @@
       return this.canvas.toDataURL();
     },
     // Get the position of the mouse/touch
-    _getPosition: function(event) {
+    _getPosition: function (event) {
       var xPos, yPos, rect;
       rect = this.canvas.getBoundingClientRect();
-      event = event.originalEvent;
+      if (event.originalEvent)
+          event = event.originalEvent;
+
       // Touch event
-      if (event.type.indexOf('touch') !== -1) { // event.constructor === TouchEvent
+      if (event.type.indexOf('touch') !== -1) { // event.constructor === TouchEvent          
         xPos = event.touches[0].clientX - rect.left;
         yPos = event.touches[0].clientY - rect.top;
       }
@@ -138,7 +162,7 @@
     },
     // Render the signature to the canvas
     _renderCanvas: function() {
-      if (this.drawing) {
+        if (this.drawing) {
         this.ctx.beginPath();
         this.ctx.moveTo(this.lastPos.x, this.lastPos.y);
         this.ctx.lineTo(this.currentPos.x, this.currentPos.y);
