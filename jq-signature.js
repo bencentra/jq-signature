@@ -50,23 +50,6 @@
   }
 
   Signature.prototype = {
-      mouseDown: function (e, element) {
-          element.drawing = true;
-          element.lastPos = element.currentPos = element._getPosition(e);
-      },
-
-
-      mouseMove: function (e, element) {
-          element.currentPos = element._getPosition(e);
-      },
-
-
-      mouseUp: function (element) {
-          element.drawing = false;
-              // Trigger a change event
-              var changedEvent = $.Event('jq.signature.changed');
-              element.$element.trigger(changedEvent);
-      },
     // Initialize the signature canvas
     init: function() {
       // Set up the canvas
@@ -177,28 +160,6 @@
         y: yPos
       };
     },
-
-    //get_PositionIE: function(event)
-    //{
-    //    console.log(event.type);
-    //    var xPos, yPos, rect;
-    //    rect = this.canvas.getBoundingClientRect();
-    //    // Touch event
-    //    if (event.type.indexOf('touch') !== -1) { // event.constructor === TouchEvent          
-    //        xPos = event.touches[0].clientX - rect.left;
-    //        yPos = event.touches[0].clientY - rect.top;
-    //    }
-    //        // Mouse event
-    //    else {
-    //        xPos = event.clientX - rect.left;
-    //        yPos = event.clientY - rect.top;
-    //    }
-    //    return {
-    //        x: xPos,
-    //        y: yPos
-    //    };
-    //},
-
     // Render the signature to the canvas
     _renderCanvas: function() {
         if (this.drawing) {
