@@ -2,7 +2,7 @@
 	'use strict';
   // Get a regular interval for drawing to the screen
   window.requestAnimFrame = (function (callback) {
-    return window.requestAnimationFrame || 
+    return window.requestAnimationFrame ||
       window.webkitRequestAnimationFrame ||
       window.mozRequestAnimationFrame ||
       window.oRequestAnimationFrame ||
@@ -28,7 +28,7 @@
       },
       canvasFixture = '<canvas></canvas>';
 
-  function Signature(element, options) {    
+  function Signature(element, options) {
     // DOM elements/objects
     this.element = element;
     this.$element = $(this.element);
@@ -66,12 +66,11 @@
         background: this.settings.background,
         cursor: 'crosshair'
       });
-
       this.$canvas.attr('id', 'TheCanvas');
       // Fit canvas to width of parent
       if (this.settings.autoFit === true) {
         this._resizeCanvas();
-        // TO-DO - allow for dynamic canvas resizing 
+        // TO-DO - allow for dynamic canvas resizing
         // (need to save canvas state before changing width to avoid getting cleared)
         // var timeout = false;
         // $(window).on('resize', $.proxy(function(e) {
@@ -81,47 +80,48 @@
       }
       this.canvas = this.$canvas[0];
       this._resetCanvas();
-        // Set up mouse events
-
-        // IE fix
+      // Set up mouse events
+      // IE fix
       if (window.PointerEvent) {
-          var c = document.getElementById('TheCanvas');
-          c.addEventListener("MSPointerUp", $.proxy(function (e) {
-                  this.drawing = false;
-                  // Trigger a change event
-                  var changedEvent = $.Event('jq.signature.changed');
-                  this.$element.trigger(changedEvent);
-              }, this), false);
-          c.addEventListener("MSPointerMove", $.proxy(function (e) {
-              this.currentPos = this._getPosition(e);
-          }, this), false);
-          c.addEventListener("MSPointerDown", $.proxy(function (e) {
-                  this.drawing = true;
-                  this.lastPos = this.currentPos = this._getPosition(e);
-              }, this), false);
+				// Prevent touches from dragging the page around
+				this.$canvas.parent().css('-ms-touch-action', 'none');
+        var c = this.$canvas[0];
+        c.addEventListener("MSPointerUp", $.proxy(function (e) {
+          this.drawing = false;
+          // Trigger a change event
+          var changedEvent = $.Event('jq.signature.changed');
+          this.$element.trigger(changedEvent);
+        }, this), false);
+        c.addEventListener("MSPointerMove", $.proxy(function (e) {
+          this.currentPos = this._getPosition(e);
+        }, this), false);
+        c.addEventListener("MSPointerDown", $.proxy(function (e) {
+          this.drawing = true;
+          this.lastPos = this.currentPos = this._getPosition(e);
+        }, this), false);
       }
+			// Everything else
       else {
-          this.$canvas.on('mousedown touchstart', $.proxy(function (e) {
-              this.drawing = true;
-              this.lastPos = this.currentPos = this._getPosition(e);
-          }, this));
-          this.$canvas.on('mousemove touchmove', $.proxy(function (e) {
-              this.currentPos = this._getPosition(e);
-          }, this));
-          this.$canvas.on('mouseup touchend', $.proxy(function (e) {
-              this.drawing = false;
-              // Trigger a change event
-              var changedEvent = $.Event('jq.signature.changed');
-              this.$element.trigger(changedEvent);
-          }, this));
-          // Prevent document scrolling when touching canvas
-          $(document).on('touchstart touchmove touchend', $.proxy(function (e) {
-              if (e.target === this.canvas) {
-                  e.preventDefault();
-              }
-          }, this));
+        this.$canvas.on('mousedown touchstart', $.proxy(function (e) {
+          this.drawing = true;
+          this.lastPos = this.currentPos = this._getPosition(e);
+        }, this));
+        this.$canvas.on('mousemove touchmove', $.proxy(function (e) {
+          this.currentPos = this._getPosition(e);
+        }, this));
+        this.$canvas.on('mouseup touchend', $.proxy(function (e) {
+          this.drawing = false;
+          // Trigger a change event
+          var changedEvent = $.Event('jq.signature.changed');
+          this.$element.trigger(changedEvent);
+        }, this));
+        // Prevent document scrolling when touching canvas
+        $(document).on('touchstart touchmove touchend', $.proxy(function (e) {
+          if (e.target === this.canvas) {
+              e.preventDefault();
+          }
+        }, this));
       }
-
       // Start drawing
       var that = this;
       (function drawLoop() {
@@ -146,7 +146,7 @@
           event = event.originalEvent;
 
       // Touch event
-      if (event.type.indexOf('touch') !== -1) { // event.constructor === TouchEvent          
+      if (event.type.indexOf('touch') !== -1) { // event.constructor === TouchEvent
         xPos = event.touches[0].clientX - rect.left;
         yPos = event.touches[0].clientY - rect.top;
       }
@@ -196,7 +196,7 @@
           $.data(this, 'plugin_' + pluginName, new Signature( this, options ));
         }
       });
-    } 
+    }
     else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
       var returns;
       this.each(function () {
