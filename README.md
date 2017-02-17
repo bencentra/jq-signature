@@ -1,16 +1,20 @@
 # jQuery Signature
 
-[![Bower version](https://badge.fury.io/bo/jq-signature.svg)](http://badge.fury.io/bo/jq-signature)
+[![Bower version](https://badge.fury.io/bo/jq-signature.svg)](https://badge.fury.io/bo/jq-signature)
 
-jQuery plugin for creating touch-friendly signature fields using the HTML5 canvas. 
+[![npm version](https://badge.fury.io/js/jq-signature.svg)](https://badge.fury.io/js/jq-signature)
+
+jQuery plugin for creating touch-friendly signature fields using the HTML5 canvas.
 
 Check out [the demo][demo]!
 
 ## Usage
 
-Include `jq-signature.js` (development) or `jq-signature.min.js` (production) on your webpage. 
+Include `jq-signature.js` (development) or `jq-signature.min.js` (production) on your webpage.
 
-You can also install it via Bower: `bower install jq-signature`.
+You can also install it via:
+* bower: `bower install jq-signature`.
+* npm: `npm install jq-signature`
 
 For complete usage instructions, check out the [demo page][demo].
 
